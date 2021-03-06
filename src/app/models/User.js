@@ -1,73 +1,26 @@
-const userSchema = new Schema({
-  username: {
-    type: String,
-    require: true
-  },
-  password: {
-    type: String,
-    require: true
-  },
-  email: {
-    type: String,
-    require: true
-  },
-  age: {
-    type: Number,
-    require: true
-  },
-  phone: {
-    type: String,
-    require: true
-  },
-  address: {
-    type: String,
-    require: true
-  },
-  role: {
-    type: String,
-    default: "customer"
-  },
-  created: {
-    type: String,
-    default: Date.now
-  },
-  cart: {
-    items: [
-      {
-        productId: {
-          type: Schema.Types.ObjectId,
-          ref: "productseo",
-          required: true
-        },
-        quantity: { type: Number }
-      }
-    ],
-    sum: {
-      type: Number,
-      default: 0
-    }
-  },
- 
-  productNewOrder:{
-    order:[],
-    fullname:{
-      type: String,
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const slug = require('mongoose-slug-generator');
+const mongooseDelete = require('mongoose-delete');
+
+const User = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    isAdmin: { type: Boolean, default: false, required: true },
+    isSeller: { type: Boolean, default: false, required: true },
+    seller: {
+      name: String,
+      logo: String,
+      description: String,
+      rating: { type: Number, default: 0, required: true },
+      numReviews: { type: Number, default: 0, required: true },
     },
-    mobilenumber:{
-      type: String,
-    },
-    address:{
-      type: String,
-    },
-    createdOrder:{
-      type: String,
-    },
-    Note:{
-      type: String,
-    },
-    status:{
-      type: String,
-      default: 'Pending',
-    }
   },
-});
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model('User', User);
