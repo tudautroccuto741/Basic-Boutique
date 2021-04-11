@@ -21,15 +21,15 @@ app.use(morgan('combined'))
 
 //Template engine
 app.engine(
-  'hbs', 
+  'html', 
   handlebars({
-    extname: '.hbs',
+    extname: '.html',
     helpers: {
       sum: (a, b) => a+b,
     }
   }),
 );
-app.set('view engine', 'hbs')
+app.set('view engine', 'html')
 app.set('views', path.join(__dirname, 'resources', 'views'))
 
 //midleware

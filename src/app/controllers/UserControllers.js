@@ -7,12 +7,12 @@ class UserControllers {
 
    // [GET]/user/register
    register(req, res, next){
-      res.render('layouts/register.hbs')
+      res.render('loginForm/form.html')
    }
     
    // [GET]/user/login
    login(req, res, next){
-      res.render('layouts/login.hbs')
+      res.render('loginForm/login.html')
    }
 
    // [POST]/:slug/login
